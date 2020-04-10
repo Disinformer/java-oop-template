@@ -30,6 +30,9 @@ public class SimpleAuthorRepository implements AuthorRepository {
 
     @Override
     public boolean remove(Author author) {
+        if (count() < 1){
+            return false;
+        }
         String name = author.getName();
         String lastName = author.getLastName();
         if (findByFullName(name, lastName) == null) {
