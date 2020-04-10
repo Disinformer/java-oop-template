@@ -8,7 +8,11 @@ public class SimpleSchoolBookRepository implements BookRepository<SchoolBook> {
 
     @Override
     public boolean save(SchoolBook book) {
-        return false;
+        SchoolBook[] temp = new SchoolBook[count() + 1];
+        System.arraycopy(schoolBooks, 0, temp, 0, count());
+        temp[temp.length - 1] = book;
+        schoolBooks = temp;
+        return true;
     }
 
     @Override
@@ -23,6 +27,6 @@ public class SimpleSchoolBookRepository implements BookRepository<SchoolBook> {
 
     @Override
     public int count() {
-        return 0;
+        return schoolBooks.length;
     }
 }
