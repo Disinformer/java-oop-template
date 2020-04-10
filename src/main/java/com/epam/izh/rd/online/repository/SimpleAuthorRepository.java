@@ -11,8 +11,8 @@ public class SimpleAuthorRepository implements AuthorRepository {
         if (findByFullName(author.getName(), author.getLastName()) != null) {
             return false;
         }
-        Author[] temp = new Author[authors.length + 1];
-        System.arraycopy(authors, 0, temp, 0, authors.length);
+        Author[] temp = new Author[count() + 1];
+        System.arraycopy(authors, 0, temp, 0, count());
         temp[temp.length - 1] = author;
         authors = temp;
         return true;
@@ -20,7 +20,7 @@ public class SimpleAuthorRepository implements AuthorRepository {
 
     @Override
     public Author findByFullName(String name, String lastName) {
-        for (int i = 0; i < authors.length; i++) {
+        for (int i = 0; i < count(); i++) {
             if ( authors[i].getName().equals(name) && authors[i].getLastName().equals(lastName) ) {
                 return authors[i];
             }
@@ -36,8 +36,8 @@ public class SimpleAuthorRepository implements AuthorRepository {
             return false;
         }
         int j = 0;
-        Author[] tempAuthors = new Author[authors.length - 1];
-        for (int i = 0; i < authors.length; i++) {
+        Author[] tempAuthors = new Author[count() - 1];
+        for (int i = 0; i < count(); i++) {
             if (authors[i].getName().equals(name) && authors[i].getLastName().equals(lastName)) {
                 continue;
             }
