@@ -35,10 +35,10 @@ public class SimpleSchoolBookRepository implements BookRepository<SchoolBook> {
                 temp[++j] = schoolBooks[i];
             }
         }
-        if (j == -1) {
+        int newSize = j + 1;
+        if (newSize == count()) {
             return false;
         }
-        int newSize = j + 1;
         schoolBooks = new SchoolBook[newSize];
         System.arraycopy(temp, 0, schoolBooks, 0, newSize);
         return true;
