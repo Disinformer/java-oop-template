@@ -39,13 +39,14 @@ public class SimpleAuthorRepository implements AuthorRepository {
             return false;
         }
         int j = 0;
-        Author[] tempAuthors = new Author[count() - 1];
+        Author[] temp = new Author[count() - 1];
         for (int i = 0; i < count(); i++) {
             if (authors[i].getName().equals(name) && authors[i].getLastName().equals(lastName)) {
                 continue;
             }
-            tempAuthors[j++] = authors[i];
+            temp[j++] = authors[i];
         }
+        authors = temp;
         return true;
     }
 
