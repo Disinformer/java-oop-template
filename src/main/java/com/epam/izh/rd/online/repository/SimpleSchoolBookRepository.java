@@ -8,25 +8,52 @@ public class SimpleSchoolBookRepository implements BookRepository<SchoolBook> {
 
     @Override
     public boolean save(SchoolBook book) {
-        SchoolBook[] temp = new SchoolBook[count() + 1];
-        System.arraycopy(schoolBooks, 0, temp, 0, count());
-        temp[temp.length - 1] = book;
-        schoolBooks = temp;
+        schoolBooks = addElementToArray(schoolBooks, book);
         return true;
     }
 
     @Override
     public SchoolBook[] findByName(String name) {
-        return new SchoolBook[0];
+        SchoolBook[] result = new SchoolBook[0];
+        for (int i = 0; i < count(); i++) {
+            if (schoolBooks[i].getName().equals(name)) {
+                result = addElementToArray(result, schoolBooks[i]);
+            }
+        }
+        return result;
     }
 
     @Override
     public boolean removeByName(String name) {
-        return false;
+        if (count() < 1) {
+            return false;
+        }
+        int j = -1;
+        SchoolBook[] temp = new SchoolBook[count()];
+        for (int i = 0; i < schoolBooks.length; i++) {
+            if (!schoolBooks[i].getName().equals(name)) {
+                temp[++j] = schoolBooks[i];
+            }
+        }
+        if (j == -1) {
+            return false;
+        }
+        int newSize = j + 1;
+        schoolBooks = new SchoolBook[newSize];
+        System.arraycopy(temp, 0, schoolBooks, 0, newSize);
+        return true;
     }
 
     @Override
     public int count() {
         return schoolBooks.length;
+    }
+
+
+    private SchoolBook[] addElementToArray(SchoolBook[] scr, SchoolBook newElement) {
+        SchoolBook[] temp = new SchoolBook[scr.length + 1];
+        System.arraycopy(scr, 0, temp, 0, scr.length);
+        temp[temp.length - 1] = newElement;
+        return temp;
     }
 }
