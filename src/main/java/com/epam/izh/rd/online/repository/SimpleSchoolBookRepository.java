@@ -28,14 +28,13 @@ public class SimpleSchoolBookRepository implements BookRepository<SchoolBook> {
         if (count() < 1) {
             return false;
         }
-        int j = -1;
+        int newSize = 0;
         SchoolBook[] temp = new SchoolBook[count()];
         for (int i = 0; i < schoolBooks.length; i++) {
             if (!schoolBooks[i].getName().equals(name)) {
-                temp[++j] = schoolBooks[i];
+                temp[newSize++] = schoolBooks[i];
             }
         }
-        int newSize = j + 1;
         if (newSize == count()) {
             return false;
         }
